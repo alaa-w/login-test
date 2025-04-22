@@ -29,3 +29,8 @@ button.btn{
 button.btn:hover{
     background-color: #c12e81;
 }
+
+div .logout{
+    margin-top: 5px;
+    margin-left: 85%;
+}

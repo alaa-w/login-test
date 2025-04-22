@@ -1,23 +1,78 @@
-// Common regex patterns (define outside so all functions can use them)
+// Common regex patterns
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passRegex = /^.{6,}$/;
 
-function login() {
-    const emailinput = document.getElementById("loginEmail").value.trim();
-    const passowrdinput = document.getElementById("loginPassword").value.trim();
+// Sign up function
+function signup() {
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
 
-    if (!emailinput.match(emailRegex)) {
-        alert("Please enter valid email");
+    if (name === "" || email === "" || password === "") {
+        alert("Please fill in all fields.");
         return;
     }
 
-    if (!passowrdinput.match(passRegex)) {
+    if (!email.match(emailRegex)) {
+        alert("Please enter a valid email.");
+        return;
+    }
+
+    if (!password.match(passRegex)) {
         alert("Password must be at least 6 characters.");
         return;
     }
 
-    alert("Login successful");
+    const user = { name, email, password };
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Account created successfully!");
+    showLogin();
 }
+
+
+function login() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!email.match(emailRegex)) {
+        alert("Please enter a valid email.");
+        return;
+    }
+
+    if (!password.match(passRegex)) {
+        alert("Password must be at least 6 characters.");
+        return;
+    }
+
+    if (!savedUser || savedUser.email !== email || savedUser.password !== password) {
+        alert("Incorrect email or password.");
+        return;
+    }
+
+    showWelcomeScreen(savedUser.name);
+}
+
+
+function showWelcomeScreen(name) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("welcomeInterface").style.display = "block";
+
+    document.getElementById("welcomeMessage").textContent = `Welcome, ${name}!`;
+}
+
+
+function logout() {
+    document.getElementById("welcomeInterface").style.display = "none";
+    document.getElementById("login").style.display = "block";
+
+    document.getElementById("loginEmail").value = "";
+    document.getElementById("loginPassword").value = "";
+}
+
 
 function showSignUp() {
     document.getElementById("login").style.display = "none";
@@ -27,28 +82,4 @@ function showSignUp() {
 function showLogin() {
     document.getElementById("signup").style.display = "none";
     document.getElementById("login").style.display = "block";
-}
-
-function signup() {
-    var name = document.getElementById("signupName").value.trim();
-    var emailsignup = document.getElementById("signupEmail").value.trim();
-    var passwordsignup = document.getElementById("signupPassword").value.trim();
-
-    if (name === "" || emailsignup === "" || passwordsignup === "") {
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    if (!emailsignup.match(emailRegex)) {
-        alert("Please enter a valid email.");
-        return;
-    }
-
-    if (!passwordsignup.match(passRegex)) {
-        alert("Password must be at least 6 characters.");
-        return;
-    }
-
-    alert("Account created successfully!");
-    showLogin();
 }
