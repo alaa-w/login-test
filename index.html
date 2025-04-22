@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <title>Document</title>
+</head>
+<body>
+  <div class="box w-75 m-auto mt-5">
+
+  <div id="login">
+    <h1 class="text-center">Smart Login System</h1>
+
+    <input type="email" class="form-control mt-3" id="loginEmail" placeholder="Enter your email">
+    <div id="emailError" class="text-danger small"></div>
+
+    <input type="password" class="form-control mt-3" id="loginPassword" placeholder="Enter your password">
+    <div id="passwordError" class="text-danger small"></div>
+
+    <button class="btn w-100 mt-4" onclick="login()">Login</button>
+
+    <p class="text-center mt-3 text-white">Don’t have an account? 
+      <a href="#" onclick="showSignUp()">Sign Up</a>
+    </p>
+  </div>
+
+  
+  <div id="signup" style="display: none;">
+    <h1 class="text-center">Create Account</h1>
+
+    <input type="text" class="form-control mt-3" id="signupName" placeholder="Enter your name">
+    <input type="email" class="form-control mt-3" id="signupEmail" placeholder="Enter your email">
+    <input type="password" class="form-control mt-3" id="signupPassword" placeholder="Enter your password">
+
+    <button class="btn w-100 mt-4" onclick="signup()">Sign Up</button>
+
+    <p class="text-center mt-3 text-white">You have an account? 
+      <a href="#" onclick="showLogin()">Sign In</a>
+    </p>
+  </div>
+
+</div>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+    
+</body>
+</html>
